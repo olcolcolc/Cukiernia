@@ -19,8 +19,6 @@ cakes = [
              Ingredient("Cukier", "kg", 0.42, 3.4)
          ])
 ]
-# TODO kiedyś excel z listą wszystkich ciast
-
 
 
 # menu_possible_options - lista z możliwymi opcjami do wyboru
@@ -135,7 +133,9 @@ def show_shopping_list():       # klasa igrentng: name, unit, amount, price_per_
     for ingredient, summed_amount in summed_ingredients.items():
         print("{} - {} {}".format(ingredient.name, summed_amount, ingredient.unit))
 
-    note_answer = input("Czy chcesz zapisać listę zakupów w txt? (Odpowiedz T/N):").lower()
+    note_answer = input("Czy chcesz zapisać listę zakupów w xlsx? (Odpowiedz T/N):").lower()
+
+    #tworzenie pliku xlsx
     if note_answer == "t":
         workbook = xlsxwriter.Workbook("lista_zakupów.xlsx")     #tworzymy plik lista_zakupow.xlsx
         bold_format = workbook.add_format({"bold": True})   #formatujemy czcionke (pogrubiona)
@@ -144,6 +144,7 @@ def show_shopping_list():       # klasa igrentng: name, unit, amount, price_per_
         worksheet.write('A1', 'Produkt', bold_format)
         worksheet.write('B1', 'Ilość', bold_format)
         worksheet.write('C1', 'Jednostka', bold_format)
+        worksheet.write('D1', 'Kupione', bold_format)
 
         rowIndex = 2
         for ingredient, summed_amount in summed_ingredients.items():
@@ -161,8 +162,6 @@ def show_shopping_list():       # klasa igrentng: name, unit, amount, price_per_
         pass
     else:
         print("Błąd")
-
-    # TODO zapisz do pliku
 
 
 # Pętla główna programu, z jego funkcjami
