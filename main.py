@@ -138,20 +138,24 @@ def show_shopping_list():       # klasa igrentng: name, unit, amount, price_per_
     #tworzenie pliku xlsx
     if note_answer == "t":
         workbook = xlsxwriter.Workbook("lista_zakupów.xlsx")     #tworzymy plik lista_zakupow.xlsx
-        bold_format = workbook.add_format({"bold": True, "border": 2})   #formatujemy czcionke (pogrubiona)
+
+        title_format = workbook.add_format({'bold': True,
+                                      'align': 'center',
+                                      'border': 1})
+        data_format = workbook.add_format({'border': 1})
         worksheet = workbook.add_worksheet("lista")     #tworzymy arkusz
 
-        # JaC3kC: Nie może być po polsku, to produkt skierowany na rynek międzynarodowy
-        worksheet.write('A1', 'Product', bold_format)
-        worksheet.write('B1', 'Quantity', bold_format)
-        worksheet.write('C1', 'Unit', bold_format)
-        worksheet.write('D1', 'Bought', bold_format)
+        worksheet.write('A1', 'Product', title_format)
+        worksheet.write('B1', 'Quantity', title_format)
+        worksheet.write('C1', 'Unit', title_format)
+        worksheet.write('D1', 'Bought', title_format)
 
         rowIndex = 2
         for ingredient, summed_amount in summed_ingredients.items():
-            worksheet.write('A' + str(rowIndex), ingredient.name)
-            worksheet.write('B' + str(rowIndex), summed_amount)
-            worksheet.write('C' + str(rowIndex), ingredient.unit)
+            worksheet.write('A' + str(rowIndex), ingredient.name, data_format)
+            worksheet.write('B' + str(rowIndex), summed_amount, data_format)
+            worksheet.write('C' + str(rowIndex), ingredient.unit, data_format)
+            worksheet.write('D' + str(rowIndex), "", data_format)
 
             rowIndex += 1
 
