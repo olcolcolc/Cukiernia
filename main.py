@@ -138,13 +138,14 @@ def show_shopping_list():       # klasa igrentng: name, unit, amount, price_per_
     #tworzenie pliku xlsx
     if note_answer == "t":
         workbook = xlsxwriter.Workbook("lista_zakupów.xlsx")     #tworzymy plik lista_zakupow.xlsx
-        bold_format = workbook.add_format({"bold": True})   #formatujemy czcionke (pogrubiona)
+        bold_format = workbook.add_format({"bold": True, "border": 2})   #formatujemy czcionke (pogrubiona)
         worksheet = workbook.add_worksheet("lista")     #tworzymy arkusz
 
-        worksheet.write('A1', 'Produkt', bold_format)
-        worksheet.write('B1', 'Ilość', bold_format)
-        worksheet.write('C1', 'Jednostka', bold_format)
-        worksheet.write('D1', 'Kupione', bold_format)
+        # JaC3kC: Nie może być po polsku, to produkt skierowany na rynek międzynarodowy
+        worksheet.write('A1', 'Product', bold_format)
+        worksheet.write('B1', 'Quantity', bold_format)
+        worksheet.write('C1', 'Unit', bold_format)
+        worksheet.write('D1', 'Bought', bold_format)
 
         rowIndex = 2
         for ingredient, summed_amount in summed_ingredients.items():
